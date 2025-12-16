@@ -1,6 +1,6 @@
 # Eventos Estrella Event Management Website
 
-A responsive static website project for event management, built entirely by Aleena C R from design to development. This project showcases skills in web development and graphic design, featuring custom illustrations converted from Adobe Illustrator to web-ready assets.
+A responsive static website project for event management(dummy company). This project showcases skills in web development and graphic design, featuring custom illustrations converted from Adobe Illustrator to web-ready assets.
 
 ## Overview
 
@@ -33,7 +33,7 @@ The website presents a fictional event management company called Eventos Estrell
 
 ## Design Process
 
-The entire design was conceptualized and created by Aleena C R in Adobe Illustrator, including:
+The designs was conceptualized and created by Aleena C R in Adobe Illustrator, including:
 - Logo design with "Eventos Estrella" branding
 - Icon sets (email, phone, social media)
 - Layout wireframes
@@ -52,3 +52,4 @@ This project is created for portfolio purposes and not intended for commercial u
 ---
 
 *Designed and Developed by Aleena C R*
+
