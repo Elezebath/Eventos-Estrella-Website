@@ -1,0 +1,1 @@
+A responsive static website project for event management, showcasing custom designs created and implemented entirely by me. Features original Illustrator template converted to HTML5, CSS3, and JavaScript (with jQuery), including interactive slideshows, form validation, custom fonts integration, and responsive layout.
