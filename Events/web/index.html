@@ -7,6 +7,11 @@
     <link rel="icon" type="image/png" href="Images/favicon.png">
     <title>Eventos Estrella</title>
     <link href="CSS/style.css" rel="stylesheet" type="text/css">
+    <!-- Preload critical images for better performance -->
+    <link rel="preload" as="image" href="Images/logo.png">
+    <link rel="preload" as="image" href="Images/menu.jpg">
+    <link rel="preload" as="image" href="Images/bannerimg17.jpg">
+    <link rel="preload" as="image" href="Images/gallery1.jpg">
 </head>
 
 <body class="dark-theme">
@@ -92,7 +97,7 @@
             <div class="row">
                 <div class="abt_image col" id="abt">
                     <div class="filter-dark">
-                        <img src="Images/About image.png" class="img-filter-dark">
+                        <img data-src="Images/About image.png" class="img-filter-dark lazy">
                     </div>
                 </div>
                 <div class="abt_text col">
@@ -142,14 +147,14 @@
             </div>
 
             <div class="row">
-                <div class="gallery-img lazyload col"><img src="Images/gallery1.jpg"></div>
-                <div class="gallery-img lazyload col"><img src="Images/gallery2.jpg"></div>
-                <div class="gallery-img lazyload col"><img src="Images/gallery3.jpg"></div>
+                <div class="gallery-img col"><img data-src="Images/gallery1.jpg" class="lazy"></div>
+                <div class="gallery-img col"><img data-src="Images/gallery2.jpg" class="lazy"></div>
+                <div class="gallery-img col"><img data-src="Images/gallery3.jpg" class="lazy"></div>
             </div>
             <div class="row">
-                <div class="gallery-img lazyload col"><img src="Images/gallery4.jpg"></div>
-                <div class="gallery-img lazyload col"><img src="Images/gallery5.jpg"></div>
-                <div class="gallery-img lazyload col"><img src="Images/bannerimg11.jpg"></div>
+                <div class="gallery-img col"><img data-src="Images/gallery4.jpg" class="lazy"></div>
+                <div class="gallery-img col"><img data-src="Images/gallery5.jpg" class="lazy"></div>
+                <div class="gallery-img col"><img data-src="Images/bannerimg11.jpg" class="lazy"></div>
             </div>
         </div>
     </div>
@@ -171,8 +176,8 @@
                                 <div class="col-md">
                                     <div class="card">
                                         <div class="w-100">
-                                            <div class="img-bg-light lazyload">
-                                                <img src="Images/light.jpg">
+                                        <div class="img-bg-light">
+                                                <img data-src="Images/light.jpg" class="lazy">
                                             </div>
                                         </div><br>
                                         <p class="text-uppercase text-color-white"><b>Light</b> </p><br>
@@ -185,8 +190,8 @@
                                 <div class="col-md">
                                     <div class="card">
                                         <div class="w-100">
-                                            <div class="img-bg-light lazyload">
-                                                <img src="Images/sound.jpg">
+                                            <div class="img-bg-light">
+                                                <img data-src="Images/sound.jpg" class="lazy">
                                             </div>
                                         </div><br>
                                         <p class="text-uppercase text-color-white"><b>Sound</b> </p><br>
@@ -200,8 +205,8 @@
                                 <div class="col-md">
                                     <div class="card">
                                         <div class="w-100">
-                                            <div class="img-bg-light lazyload">
-                                                <img src="Images/decorations.jpg">
+                                            <div class="img-bg-light">
+                                                <img data-src="Images/decorations.jpg" class="lazy">
                                             </div>
                                         </div><br>
                                         <p class="text-uppercase text-color-white"><b>Decorations</b> </p><br>
@@ -218,8 +223,8 @@
                                 <div class="col-md">
                                     <div class="card">
                                         <div class="w-100">
-                                            <div class="img-bg-light lazyload">
-                                                <img src="Images/videography.jpg">
+                                            <div class="img-bg-light">
+                                                <img data-src="Images/videography.jpg" class="lazy">
                                             </div>
                                         </div><br>
                                         <p class="text-uppercase text-color-white"><b>Photography & Videography</b> </p><br>
@@ -232,8 +237,8 @@
                                 <div class="col-md">
                                     <div class="card">
                                         <div class="w-100">
-                                            <div class="img-bg-light lazyload">
-                                                <img src="Images/entertainment.jpg">
+                                            <div class="img-bg-light">
+                                                <img data-src="Images/entertainment.jpg" class="lazy">
                                             </div>
                                         </div><br>
                                         <p class="text-uppercase text-color-white"><b></b>Entertainment events </p><br>
@@ -246,8 +251,8 @@
                                 <div class="col-md">
                                     <div class="card">
                                         <div class="w-100">
-                                            <div class="img-bg-light lazyload">
-                                                <img src="Images/food.jpg">
+                                            <div class="img-bg-light">
+                                                <img data-src="Images/food.jpg" class="lazy">
                                             </div>
                                         </div><br>
                                         <p class="text-uppercase text-color-white"><b>Food and beverages</b> </p><br>
@@ -447,6 +452,61 @@
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
         }
+
+        // Lazy loading implementation
+        (function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.removeAttribute("data-src");
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                }, {
+                    rootMargin: "50px 0px" // Start loading 50px before entering viewport
+                });
+
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver
+                let lazyLoad = function() {
+                    lazyImages.forEach(function(lazyImage) {
+                        if (lazyImage.classList.contains("lazy") &&
+                            lazyImage.getBoundingClientRect().top <= window.innerHeight + 100 &&
+                            lazyImage.getBoundingClientRect().bottom >= 0 &&
+                            getComputedStyle(lazyImage).display !== "none") {
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.removeAttribute("data-src");
+                            lazyImage.classList.remove("lazy");
+                        }
+                    });
+                };
+
+                // Throttle scroll events for better performance
+                let throttleTimer;
+                let throttle = function(func, delay) {
+                    return function() {
+                        if (throttleTimer) return;
+                        throttleTimer = setTimeout(function() {
+                            func();
+                            throttleTimer = null;
+                        }, delay);
+                    };
+                };
+
+                lazyLoad();
+                window.addEventListener("scroll", throttle(lazyLoad, 16)); // ~60fps
+                window.addEventListener("resize", throttle(lazyLoad, 16));
+            }
+        })();
     </script>
 </footer>
 
