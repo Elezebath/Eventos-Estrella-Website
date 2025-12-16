@@ -42,14 +42,20 @@ Website images and hero graphics were sourced from Google resources and optimize
 
 ## Credits
 
-- **Images**: Sourced from Google resources and optimized for web performance
-- **Design Inspiration**: Used Google-recommended resources for design guidance
+- **Images**le online resources and optimized for web performance
+- **Design Inspiration**: :  Used Google-recommended resources for design guidance
+
+## Copyright
+
+All images used in this repository are the property of their respective owners.  
+No copyright infringement is intended.  
+
+If you are the copyright holder and believe an image is used incorrectly, please contact me and I will remove it promptly.
 
 ## License
 
-This project is created for portfolio purposes and not intended for commercial use.
+This project is created for portfolio purposes only and is not intended for commercial use.
 
 ---
 
 *Designed and Developed by Aleena C R*
-
